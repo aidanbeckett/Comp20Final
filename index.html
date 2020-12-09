@@ -1,71 +1,63 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Recipe App">
-    <meta name="author" content="Eric, Jessica, Aidan, Pan">	
-    <title>Real Recipes</title>
-	  <style>
-      body {
-        background-color: rgb(34,23,41);
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      p {
-        padding-left: 40px;
-        padding-right: 40px;
-        font-size: 20px;
-      }
-      .button {
-        text-align: center;
-        background-color: white;
-        color: rgb(34,23,41);
-        font-size: 15px;
-      }
-      a:link {
-        color: white;
-      }
-      a:visited {
-        color: grey;
-      }
-      footer {
-        padding-top: 40px;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
+  <title>RECIPE APP</title>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script>
+  function init() {
+    console.log("runs init")
+    gapi.load('auth2', function() {
+      auth2 = gapi.auth2.init({
+          client_id: '1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com'
+      });
+  });
+}
+  </script>
 </head>
 <body>
-    <header style="text-align:center">
-      <p>
-      <img src="RRlogo.png" alt="Real Recipes Logo" height="10%" width="33%">
-      </p>
-      <br><br>
-    </header>
-    <h2 style="text-align:center">Rethink how you find your recipes...</h2>
-    <p>
-      Welcome to Real Recipes! Our site allows you to find your perfect recipe 
-      with just a click of a button. Use our search bar to enter the name of 
-      the dish you're looking for, and we'll pull it up with in depth 
-      nutritional information! Or, enter the ingredients you have on hand, and 
-      we'll give you the best options for you! Be sure to enter any dietray 
-      restrictions, too, so that we can give you our customized reccomendations. 
-    </p>
-    <p>
-      <h2 style="text-align:center">Get Started by Logging In!</h2>
-    </p>
-    <form style="text-align:center" action="Login.html">
-    <button class="button">Login</button>
-    </form>
-    <p>
-      <h2 style="text-align:center">Or Create an Account!</h2>
-    </p>
-    <form style="text-align:center" action="CreateAccount.html">
-    <button class="button">Sign Up</button>
-    </form>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <a href="#" onclick="signOut();">Sign out</a>
+  <h1> Main Page</h1>
+  <ul>
+      <li><a href = "/search">Go to Search Page</a> </li>
+      <li><a href = "/login">Go to Login Page</a> </li>
+      <li><a href = "/register">Go to Register Page</a> </li>
+  </ul>
+  <script> 
+
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+    }
     
-    <footer  style="text-align:center">
-      Real Recipes <br>
-      <a href=#>help@RealRecipes.com</a> </br>
-      <a href=#>1-800-Healthy</a>
-    </footer>
+    function show_user() {
+      if (auth2.isSignedIn.get()) {
+        var profile = auth2.currentUser.get().getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        document.getElementById("user_logged_in").innerHTML = profile.getEmail()+ " is signed in";
+      }else {
+        console.log("No one is currently signed in")
+        document.getElementById("user_logged_in").innerHTML = "No one is currently signed in ";
+      }
+    }
+    </script>
+    <div id = "user_logged_in"> </div>
+  <input type = "button" value = "Print currently logged in user" onclick="show_user();">
 </body>
 </html>
