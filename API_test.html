@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>API code</title>
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+		function Search() {
+			var q = document.getElementById("keyword").value;
+			var url = CreateString(q);
+
+			console.log(url)
+
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function(){
+				if (request.readyState == 4 && request.status == 200){
+					var a = request.responseText.split(',"hits":')
+					var json_string = a[1].slice(0, -1);
+					var recipes = [];
+					recipes = JSON.parse(json_string);
+					DisplayRecipes(recipes);
+				}
+			}
+
+
+			request.open("GET", url, true);
+			request.send();
+		}
+
+		function CreateString(q) {
+			var url = "https://api.edamam.com/search?q=" + q + "&app_id=00d5c492&app_key=fc773396f233a6819e492da631f9756f";
+			if (document.getElementById("isfilter").checked) 
+			{
+				if (document.getElementById("calmax").value != "") 
+				{
+					url += "&calories=" + document.getElementById("calmin").value + "-" + document.getElementById("calmax").value;
+				}
+				if (document.getElementById("ingr").value != "") 
+				{
+					url += "&ingr=" + document.getElementById("ingr").value;
+				}
+				if (document.getElementById("vege").checked)
+				{
+					url += "&health=vegetarian";
+				}
+				if (document.getElementById("vegan").checked)
+				{
+					url += "&health=vegan";
+				}
+				if (document.getElementById("peanut").checked)
+				{
+					url += "&health=peanut-free";
+				}
+				if (document.getElementById("treenut").checked)
+				{
+					url += "&health=tree-nut-free";
+				}
+				if (document.getElementById("exclude").value != "")
+				{
+					var excl = document.getElementById("exclude").value.split(",");
+					for (var i = 0; i < excl.length; i++) {
+						url += "&excluded=" + excl[i];
+					}
+				}
+			}
+			url += "&diet=" + document.getElementById("diet").value
+			return url;
+		}
+
+		// function GetNutrition(recipes){
+		// 	var nutrition_data = [];
+		// 	var url = "https://api.edamam.com/api/nutrition-details?app_id=1fca87c7&app_key=2e64a9a66d5fbde09ed5e1070cefbb3e";
+		// 	for (var i = 0; i < recipes.length; i++) {
+		// 		recipes[i]["recipe"]
+		// 	}
+
+		// }
+
+		function DisplayRecipes(recipes){
+			var str = "";
+			//var nutrition = GetNutrition(recipes);
+			for (var i = 0; i < 10; i++) {
+				if (recipes[i] != null)
+				{
+				str += "<div class='recipe'>";
+				str += "Recipe Name: "+recipes[i]["recipe"]["label"] + " <a href=" + recipes[i]["recipe"]["url"]+">link</a>"+ "</div><br>";
+				}
+			}
+			if (str == ""){
+				str = "There were no results for your search, please try different queries.";
+			}
+			$('#display').html(str);
+		}
+
+		function ShowFilters(){
+			var c = document.getElementById("isfilter");
+			var d = document.getElementById("healthfilters");
+
+			if (c.checked) 
+			{
+				d.style.display = "block";
+			}else
+			{
+				d.style.display = "none";
+			}
+		}
+	</script>
+</head>
+<body>
+
+<h3>Recipe Search</h3>
+
+<form>
+	Keyword: <input type="text" id="keyword"><br>
+	Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"><br>
+	<div id="healthfilters" style="display: none">
+	<br>Note: Not all filters must be filled out to execute a search<br>
+	Calories: Min<input type="text" id="calmin" value="0">&nbsp;&nbsp;Max<input type="text" id="calmax"><br>
+	Maximum Ingredients: <input type="number" min="1" id="ingr"><br>
+	Diet: <select id="diet" size="1">
+		<option>balanced</option>
+		<option>high-protein</option>
+		<option>low-fat</option>
+		<option>low-carb</option>
+	</select><br>
+	Vegetarian:<input type="checkbox" id="vege" name="restricitons">
+	Vegan:<input type="checkbox" id="vegan" name="restricitons">
+	Peanut Free:<input type="checkbox" id="peanut" name="restricitons">
+	Tree Nut Free:<input type="checkbox" id="treenut" name="restricitons"><br>
+	Ingredients to exclude (if multiple, seperate by commas):
+	<input type="text" id="exclude"><br>
+	</div><input type="button" name="search" value="search" onclick="Search()"><br>
+</form>
+
+<div id = "display">&nbsp;</div>
+
+</body>
+</html>
