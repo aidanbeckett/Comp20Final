@@ -89,12 +89,15 @@
 					str += Math.round(recipes[i]["recipe"]["calories"])+" calories <br>";
 					str += "Servings: "+recipes[i]["recipe"]["yield"] + "<br>";
 					str += "Ingredients: " + recipes[i]["recipe"]["ingredients"].length + "<br>";
-					//for (var j = 0; j < recipes[i]["recipe"]["ingredients"].length; j++) {
-						//str += recipes[i]["recipe"]["ingredients"][j] + ", "
-					//}
-					
-					//button
-					str += "<br><input type='button' name='save' value='Save Recipe'></div>";
+					for (var j = 0; j < recipes[i]["recipe"]["healthLabels"].length-1; j++) {
+						str += recipes[i]["recipe"]["healthLabels"][j] + ", ";
+					}
+					str += recipes[i]["recipe"]["healthLabels"][j] + "<br>";
+					for (var j = 0; j < recipes[i]["recipe"]["dietLabels"].length; j++) {
+						str += recipes[i]["recipe"]["dietLabels"][j] + " ";
+					}
+					//save button
+					str += "<br><br><input type='button' name='save' value='Save Recipe'></div>";
 				}
 			}
 			if (str == ""){
