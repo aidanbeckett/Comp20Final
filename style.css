@@ -1,0 +1,68 @@
+/*HEADER CODE*/
+/*<header style="text-align:center">
+  <p>
+  <a href="index.html"><img src="RRlogo.png" alt="Real Recipes Logo" height="10%" width="33%"></a>
+  </p>
+  <br><br>
+  <nav class = "navbar">
+      <a href = "#">Login</a>
+      <a href = "#">Find Recipes</a>
+      <a href = "#">My Recipes</a>
+   </nav>
+</header>*/
+
+/*FOOTER CODE*/
+/*<footer class="footer">
+  Real Recipes <br>
+  <a href=#>help@RealRecipes.com</a> </br>
+  <a href=#>1-800-Healthy</a>
+</footer>*/
+
+
+
+
+/*Nav Bar*/
+.navbar {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.navbar a {
+  text-decoration: underline;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+  color:rgb(0,0,0);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 16px 16px;
+  display: inline-block;
+}
+
+.navbar a:hover {
+  background-color: rgb(138,183,179);
+}
+
+/*Footer*/
+footer {
+  background-color: rgb(138,183,179);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer a {
+  color: white;
+}
+
+.footer a:visited {
+  color: grey;
+}
+
+/*Body*/
+body {
+  text-align: center;
+}
+
+/*Forms*/
+form {
+  
+}
