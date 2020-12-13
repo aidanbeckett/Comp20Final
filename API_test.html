@@ -83,12 +83,25 @@
 			for (var i = 0; i < 10; i++) {
 				if (recipes[i] != null)
 				{
-				str += "<div class='recipe'>";
-				str += "Recipe Name: "+recipes[i]["recipe"]["label"] + " <a href=" + recipes[i]["recipe"]["url"]+">link</a>"+ "</div><br>";
+					str += "<div class='recipe'>";
+					str += "<img src='" + recipes[i]["recipe"]["image"] + "' ALIGN='left'><br>";
+					str += "<h2><a href=" + recipes[i]["recipe"]["url"]+">"+recipes[i]["recipe"]["label"]+"</a></h2>";
+					str += Math.round(recipes[i]["recipe"]["calories"])+" calories <br>";
+					str += "Servings: "+recipes[i]["recipe"]["yield"] + "<br>";
+					//str += "Ingredients: ";
+					//for (var j = 0; j < recipes[i]["recipe"]["ingredients"].length; j++) {
+						//str += recipes[i]["recipe"]["ingredients"][j] + ", "
+					//}
+					
+					//button
+					str += "<br><input type='button' name='save' value='Save Recipe'></div>";
 				}
 			}
 			if (str == ""){
 				str = "There were no results for your search, please try different queries.";
+			}
+			else {
+				str += "<div class='recipe'></div>";
 			}
 			$('#display').html(str);
 		}

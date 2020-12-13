@@ -66,3 +66,28 @@ body {
 form {
   
 }
+
+/*Recipe Class*/
+.recipe {
+  padding-top: 200px;
+}
+
+.recipe a {
+  color: rgb(138,183,179);
+}
+
+.recipe a:visited {
+  color: rgb(138,183,190);
+}
+
+.recipe image {
+  padding-bottom: 30px;
+}
+
+.recipe input[type=button] {
+  background-color: rgb(138,183,179);
+  border: solid;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
