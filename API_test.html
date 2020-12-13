@@ -88,7 +88,7 @@
 					str += "<h2><a href=" + recipes[i]["recipe"]["url"]+">"+recipes[i]["recipe"]["label"]+"</a></h2>";
 					str += Math.round(recipes[i]["recipe"]["calories"])+" calories <br>";
 					str += "Servings: "+recipes[i]["recipe"]["yield"] + "<br>";
-					//str += "Ingredients: ";
+					str += "Ingredients: " + recipes[i]["recipe"]["ingredients"].length + "<br>";
 					//for (var j = 0; j < recipes[i]["recipe"]["ingredients"].length; j++) {
 						//str += recipes[i]["recipe"]["ingredients"][j] + ", "
 					//}
