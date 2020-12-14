@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="RRstyle.css">
   <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
   <title>RECIPE APP</title>
   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
@@ -18,7 +19,16 @@
 </head>
 <body>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
-  <a href="#" onclick="signOut();">Sign out</a>
+    <header class="topnav">
+    <a href="index.html"><img src= "logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <nav>
+      <ul>
+        <li><a href="About.html">About</a></li>
+        <li>|</li>
+        <li><a href="#" onclick="signOut();">Sign out</a></li>
+      </ul>
+    </nav>
+  </header>
   <h1> Main Page</h1>
   <ul>
       <li><a href = "/search">Go to Search Page</a> </li>

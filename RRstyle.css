@@ -81,13 +81,18 @@ nav ul li {
 }
 
 input {
-  width: 100%;
+  width: 90%;
   margin-bottom: 10px;
   background: white; 
   outline: none;
   padding: 10px;
   color: black;
   border-radius: 6px;
+}
+
+input[type=button], input[type=submit] {
+  width: 60%;
+  background-color: #F9EDB6;
 }
 
 input:focus {
