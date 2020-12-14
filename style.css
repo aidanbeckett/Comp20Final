@@ -24,13 +24,15 @@
 /*Nav Bar*/
 .navbar {
   text-align: center;
+  padding-top: 30px;
   padding-bottom: 30px;
+  background-color: rgb(138,183,179);
 }
 
 .navbar a {
   text-decoration: underline;
   font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
-  color:rgb(0,0,0);
+  color:white;
   font-size: 20px;
   font-weight: 700;
   padding: 5px 16px 16px;
