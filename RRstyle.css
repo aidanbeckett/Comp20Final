@@ -1,14 +1,15 @@
+/*Page*/
 html {
   width: 100%;
   height:100%
   min-height: 100%;
 }
 
+/*Body*/
 body {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  display: grid;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 
@@ -19,6 +20,7 @@ body {
   background-size: cover;
 }
 
+/*Images*/
 .responsive {
   display: block;
   width: 100%;
@@ -27,6 +29,7 @@ body {
   margin: auto;
 }
 
+/*Nav Bar*/
 .topnav {
   background-color: #333;
   opacity: 0.8;
@@ -62,6 +65,18 @@ nav ul li {
   text-decoration: none;
 }
 
+/*Footer*/
+footer {
+  width: 100%;
+  overflow: hidden;
+  background-color: #333;
+  opacity: 0.6;
+  padding: 10px 10px;
+  text-align: center;
+  line-height: 24px;
+}
+
+/*Index*/
 .intro {
   display: block;
   width: 80%;
@@ -69,6 +84,15 @@ nav ul li {
   margin: 0 auto;
 }
 
+.recipesearch {
+  display: block;
+  height: 100px;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*Login Form*/
 .login {
   position: relative;
   width: 300px;
@@ -99,7 +123,6 @@ input:focus {
   box-shadow: inset 0 -5px 45px rgba(100,100,100,0.5);
 }
 
-
 a:link {
   color: white;
   text-decoration: none;
@@ -113,12 +136,27 @@ a:hover {
   color: grey;
 }
 
-footer {
-  width: 100%;
-  overflow: hidden;
-  background-color: #333;
-  opacity: 0.6;
-  padding: 10px 10px;
+/*Recipe Class*/
+.recipe {
+  padding-top: 120px;
+}
+
+.recipe a {
+  color: rgb(138,183,179);
+}
+
+.recipe a:visited {
+  color: rgb(138,183,190);
+}
+
+.recipe image {
+  padding-bottom: 30px;
+}
+
+.recipe input[type=button] {
+  background-color: rgb(138,183,179);
+  border: solid;
+  color: white;
   text-align: center;
-  line-height: 24px;
+  cursor: pointer;
 }

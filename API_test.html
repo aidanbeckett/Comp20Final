@@ -3,6 +3,7 @@
 <head>
 	<title>API code</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="RRstyle.css">	
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -121,9 +122,19 @@
 	</script>
 </head>
 <body>
+<header class="topnav">
+    <a href="index.html"><img src= "logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <nav>
+      <ul>
+        <li><a href="About.html">About</a></li>
+        <li>|</li>
+        <li><a href="#" onclick="signOut();">Sign out</a></li>
+      </ul>
+    </nav>
+</header>
 
-<h3>Recipe Search</h3>
-
+<div id="recipesearch">
+<h2>Recipe Search</h2>
 <form>
 	Keyword: <input type="text" id="keyword"><br>
 	Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"><br>
@@ -147,8 +158,13 @@
 	</div>
 	<input type="button" name="search" value="search" onclick="Search()"><br>
 </form>
+</div>
 
 <div id = "display">&nbsp;</div>
-
+<footer  style="text-align:center">
+  Real Recipes <br>
+  <a href=#>help@RealRecipes.com</a> </br>
+  <a href=#>1-800-Healthy</a>
+</footer>
 </body>
 </html>
