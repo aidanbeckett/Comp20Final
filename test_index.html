@@ -1,0 +1,83 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Recipe App">
+    <meta name="author" content="Eric, Jessica, Aidan, Pan">
+    <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
+    <link rel="stylesheet" href="RRstyle.css">
+
+    <title>Real Recipes</title>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+    function init() {
+      console.log("runs init")
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+            client_id: '1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com'
+          });
+      });
+    }
+    </script>
+</head>
+<body>
+  <script> 
+    var auth2;
+
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+    }
+    
+    function show_user() {
+      if (auth2.isSignedIn.get()) {
+        var profile = auth2.currentUser.get().getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        document.getElementById("user_logged_in").innerHTML = profile.getEmail()+ " is signed in";
+      }else {
+        console.log("No one is currently signed in")
+        document.getElementById("user_logged_in").innerHTML = "No one is currently signed in ";
+      }
+    }
+    console.log("Loaded scripts");
+    </script>
+  <header class="topnav">
+    <a href="index.html"><img src= "logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <nav>
+      <ul>
+        <li><a href="About.html">About</a></li>
+        <li><a href = "/my_recipes">Go to Recipes Page</a></li>
+        <li>|</li>
+        <li><div style = 'margin-top: 0'class="g-signin2" data-onsuccess="onSignIn"></div>
+        </li>
+        <li><a href="/" onclick="signOut();">Sign out</a></li>
+
+      </ul>
+    </nav>
+  </header>
+  <br><br>
+ 
+  <footer>
+    Real Recipes <br>
+    <div id = "user_logged_in"> </div>
+    <input type = "button" value = "Print currently logged in user" onclick="show_user();">
+    <a href=#>Help@RealRecipes.com</a> </br>
+    <a href=#>1-800-HEALTHY</a>
+  </footer>
+</body>
+</html>
