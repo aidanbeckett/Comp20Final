@@ -139,24 +139,37 @@
 <h3>Recipe Search</h3>
 
 <form>
-	Keyword: <input type="text" id="keyword"><br>
-	Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"><br>
+	Keyword: <input type="text" id="keyword"></br>
+  Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"></br>
 	<div id="healthfilters" style="display: none">
 	<br>Note: Not all filters must be filled out to execute a search<br>
-	Calories: Min<input type="text" id="calmin" value="0">&nbsp;&nbsp;Max<input type="text" id="calmax"><br>
-	Maximum Ingredients: <input type="number" min="1" id="ingr"><br>
-	Diet: <select id="diet" size="1">
-		<option>balanced</option>
-		<option>high-protein</option>
-		<option>low-fat</option>
-		<option>low-carb</option>
-	</select><br>
+	<table>
+		<tr>
+			<td>Calories: </td><td>Min<input type="text" id="calmin" value="0"></td>
+		</tr>
+		<tr>
+			<td></td><td>Max<input type="text" id="calmax"></td>
+		</tr>
+		<tr>
+			<td>Maximum Ingredients: </td><td><input type="number" min="1" id="ingr"></td>
+		</tr>
+		<tr>
+			<td>Diet: </td><td><select id="diet" size="1">
+			<option>balanced</option>
+			<option>high-protein</option>
+			<option>low-fat</option>
+			<option>low-carb</option>
+		</select></td>
+		</tr>
+		<tr>
+			<td>Ingredients to exclude (if multiple, seperate by commas):</td>
+			<td><input type="text" id="exclude"></td>
+		</tr>
+	</table>
 	Vegetarian:<input type="checkbox" id="vege" name="restricitons">
 	Vegan:<input type="checkbox" id="vegan" name="restricitons">
 	Peanut Free:<input type="checkbox" id="peanut" name="restricitons">
 	Tree Nut Free:<input type="checkbox" id="treenut" name="restricitons"><br>
-	Ingredients to exclude (if multiple, seperate by commas):
-	<input type="text" id="exclude"><br>
 	</div><input type="button" name="search" value="search" onclick="Search()"><br>
 </form>
 
