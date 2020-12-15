@@ -104,6 +104,10 @@ footer {
   text-align: center;
 }
 
+.boxes {
+  width: 40%;
+}
+
 input {
   width: 90%;
   margin-bottom: 10px;
