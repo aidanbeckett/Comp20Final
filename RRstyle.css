@@ -112,16 +112,7 @@ footer {
 }
 
 .boxes {
-  display: block;
-  width: 100%;
-}
-
-label {
-  display: inline;
-}
-
-input[type=checkbox] {
-  display: inline;
+  width: 40%;
 }
 
 input {
@@ -158,16 +149,19 @@ a:hover {
 
 /*Recipe Class*/
 .recipe {
-  padding-top: 120px;
+  padding-top: 100px;
+  padding-bottom: 40px;
   text-align: center;
+  padding-left: 30px;
+  color: rgb(226,232,237);
 }
 
 .recipe a {
-  color: rgb(138,183,179);
+  color: white;
 }
 
 .recipe a:visited {
-  color: rgb(138,183,190);
+  color: white;
 }
 
 .recipe image {
@@ -180,4 +174,5 @@ a:hover {
   color: white;
   text-align: center;
   cursor: pointer;
+  width: 30%;
 }
