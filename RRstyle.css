@@ -84,8 +84,6 @@ footer {
 }
 
 .recipesearch {
-  display: flex;
-  height: 100px;
   width: 80%;
   position: relative;
   text-align: center;

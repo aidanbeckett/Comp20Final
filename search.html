@@ -163,10 +163,11 @@
 		  </ul>
 		</nav>
 	  </header>
-  <div class="recipesearch">
+
   <h3>Recipe Search</h3>
 
   <form>
+    <div class="recipesearch">
       Keyword: <input type="text" id="keyword"><br>
       Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"><br>
       <div id="healthfilters" style="display: none">
@@ -190,8 +191,9 @@
           <input type="text" id="exclude"><br>
       </div>
       <input type="button" name="search" value="search" onclick="Search()"><br>
-  </form>
   </div>
+  </form>
+  
   
   <div id ="display">&nbsp;</div>
 
