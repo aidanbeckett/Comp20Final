@@ -1,51 +1,103 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Recipe App">
     <meta name="author" content="Eric, Jessica, Aidan, Pan">
+    <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
     <link rel="stylesheet" href="RRstyle.css">
-    <title>Real Recipes</title>
-	 
-</head>
 
+    <title>Real Recipes</title>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+    function init() {
+      console.log("runs init")
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+            client_id: '1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com'
+          });
+      });
+    }
+    </script>
+</head>
 <body>
+  <script> 
+    var auth2;
+
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
+    function recipesPage(theUrl, callback){
+      console.log("Running recipes Get")
+      var user = {};
+      if (auth2.isSignedIn.get()) {
+          console.log("is signed in")
+          var profile = auth2.currentUser.get().getBasicProfile();
+          user.email = profile.getEmail();
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              console.log(xhr.responseText);
+          }
+      };
+      var url = "/my_recipes";
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      var data = JSON.stringify({email: user.email});
+      console.log("Sending " + data)
+      xhr.send(data);
+}
+    console.log("Loaded scripts");
+    </script>
   <header class="topnav">
-    <a href="index.html"><img src= "logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <a href="index.html"><img src= "/logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
     <nav>
       <ul>
-        <li><a href="About.html">About</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href = "/search">Search Page</a></li>
+        <li><a href = "/my_recipes">My Recipes</a></li>
         <li>|</li>
-        <li><a href="Login.html">Log in</a></li>
-        <li><a href="Signup.html">Sign Up</a></li>
+        <li><div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </li>
+        <li><a href="/" onclick="signOut();">Sign out</a></li>
+
       </ul>
     </nav>
   </header>
+  <br><br>
+  <div class="intro">
+    <h2 style="text-align:center">Rethink how you find your recipes...</h2>
+    <p>
+      Welcome to Real Recipes! Our site allows you to find your perfect recipe 
+      with just a click of a button. Use our search bar to enter the name of 
+      the dish you're looking for, and we'll pull it up with in depth 
+      nutritional information! Or, enter the ingredients you have on hand, and 
+      we'll give you the best options for you! Be sure to enter any dietary 
+      restrictions too, so that we can give you our customized recommendations. 
+      <img src="pan.png" alt="Wok Logo" class="responsive">
+    </p>
+    <form style="text-align:center"  method = "GET" action="/search">
+    <button class="button">GET STARTED</button>
+    </form>
     <br><br>
-    <div class="intro">
-      <h2 style="text-align:center">Rethink how you find your recipes...</h2>
-      <p>
-        Welcome to Real Recipes! Our site allows you to find your perfect recipe 
-        with just a click of a button. Use our search bar to enter the name of 
-        the dish you're looking for, and we'll pull it up with in depth 
-        nutritional information! Or, enter the ingredients you have on hand, and 
-        we'll give you the best options for you! Be sure to enter any dietary 
-        restrictions too, so that we can give you our customized recommendations. 
-        <img src="pan.png" alt="Wok Logo" class="responsive">
-      </p>
-      <p>
-        <h2 style="text-align:center">Get Started by Logging In!</h2>
-      </p>
-      <form style="text-align:center" action="Login.html">
-      <button class="button">Login</button>
-      </form>
-      <br><br>
-    </div>
-    
-    <footer>
-      Real Recipes <br>
-      <a href=#>Help@RealRecipes.com</a> </br>
-      <a href=#>1-800-HEALTHY</a>
-    </footer>
+  </div>
+  <footer>
+    Real Recipes <br>
+    <a href=#>Help@RealRecipes.com</a> </br>
+    <a href=#>1-800-HEALTHY</a>
+  </footer>
 </body>
 </html>
