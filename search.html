@@ -90,9 +90,6 @@
 			for (var i = 0; i < 10; i++) {
 				if (recipes[i] != null)
 				{
-				//str += "<div class='recipe'>";
-				//str += "Recipe Name: "+recipes[i]["recipe"]["label"] 
-				//+ " <a href=" + recipes[i]["recipe"]["url"]+">link</a></div><br>";
 				str += "<div class='recipe'>";
 				str += "<img src='" + recipes[i]["recipe"]["image"] + "' ALIGN='left'><br>";
 				str += "<h2><a href=" + recipes[i]["recipe"]["url"]+" target='_blank'>"+recipes[i]["recipe"]["label"]+"</a></h2>";
@@ -180,8 +177,12 @@
 		  </ul>
 		</nav>
 	  </header>
-
-  <h3 style="text-align: center">Recipe Search</h3>
+    <br><br>
+  <h1>Recipe Search</h1>
+  <p class="directions">Use the box below to search for specific recipes, or type in an ingredient 
+     you want to use! <br>
+     Check the "Health Filters" box for more advanced search
+     options.</p><br><br>
 
   <form>
   	<div class="wrap">
@@ -200,20 +201,20 @@
               <option>low-carb</option>
           </select><br><br>
           <div class="boxes">
+              <label for="vege"> Vegetarian</label>
           	  <input type="checkbox" id="vege" name="restrictions">
-	          <label for="vege"> Vegetarian</label>
       	  </div>
       	  <div class="boxes">
+            <label for="vegan"> Vegan</label>
 	          <input type="checkbox" id="vegan" name="restrictions">
-	          <label for="vegan"> Vegan</label>
 	      </div>
 	      <div class="boxes">
+            <label for="peanut"> Peanut Free</label>
 	          <input type="checkbox" id="peanut" name="restrictions">
-          	  <label for="peanut"> Peanut Free</label>
           </div>
           <div class="boxes">
+            <label for="treenut"> Tree Nut Free</label>
 	          <input type="checkbox" id="treenut" name="restrictions">
-	          <label for="treenut"> Tree Nut Free</label>
           </div>
           Ingredients to exclude (if multiple, separate by commas):
           <input type="text" id="exclude"><br>
