@@ -135,7 +135,17 @@
 		if (auth2.isSignedIn.get()){
 			var profile = auth2.currentUser.get().getBasicProfile();
 			var email = profile.getEmail();
-			var data = {"email": email, "recipe": recipes[num]}; 
+			var data = {"email": email, "recipe": {
+				"label": recipes[num]["recipe"]["label"],
+				"image": recipes[num]["image"]["image"],
+				"url": recipes[num]["recipe"]["url"],
+				"yield": recipes[num]["recipe"]["yield"],
+				"dietLabels": recipes[num]["recipe"]["dietLabels"],
+				"healthLabels": recipes[num]["recipe"]["healthLabels"],
+				"calories": recipes[num]["recipe"]["calories"],
+				"ingredients": recipes[num]["recipe"]["ingredients"],
+			}};
+			
 			console.log("Data to send " + data);
 		
 			$.post('/add_recipe', data, function(data, status){
