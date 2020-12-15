@@ -1,0 +1,110 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Recipe App">
+    <meta name="author" content="Eric, Jessica, Aidan, Pan">
+    <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
+    <link rel="stylesheet" href="RRstyle.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Real Recipes</title>
+    <script>
+    function init() {
+      console.log("runs init")
+      gapi.load('auth2', async function() {
+      auth2 =  gapi.auth2.init({
+            client_id: '1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com'
+          });
+      });
+    }
+    </script>
+</head>
+<body>
+  <script> 
+    var auth2; var recipe_list;
+
+    async function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      recipesPage();
+    }
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
+     function recipesPage(){
+      console.log("Running recipes Load")
+      var user = {};
+      if (auth2.isSignedIn.get()) {
+          console.log("is signed in")
+          var profile = auth2.currentUser.get().getBasicProfile();
+          user.email = profile.getEmail();
+      }
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+              var user_data = JSON.parse(xmlhttp.responseText);
+              console.log(user_data);
+              var error_text = document.getElementById('recipe_list_err');
+                if(!(jQuery.isEmptyObject(user_data))) {
+                  recipe_list = user_data.recipes;
+                  if(user_data.recipes.length < 1) {
+                    error_text.innerHTML = "Your recipe list is empty";
+                  }else {
+                    //Create List
+                    error_text.innerHTML = "<div> </div";
+                  }
+                }else {
+                  recipe_list = [];
+                  error_text.innerHTML = "You must be logged in to see your saved recipes";
+                }
+              
+          }
+      };
+      var url = "/my_recipes";
+      xmlhttp.open("POST", url, true);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      var data = JSON.stringify({email: user.email});
+      console.log("Sending " + data)
+      xmlhttp.send(data);
+}
+    console.log("Loaded scripts");
+    </script>
+  <header class="topnav">
+    <a href="index.html"><img src= "/logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <nav>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href = "/search">Search Page</a></li>
+        <li><a href = "/my_recipes">My Recipes</a></input></li>
+        <li>|</li>
+        <li><div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </li>
+        <li><a href="/" onclick="signOut();">Sign out</a></li>
+
+      </ul>
+    </nav>
+  </header>
+  <br><br>
+  <main>
+    <h1> Saved Recipes </h1>
+    <p id = "recipe_list_err"> You must be logged in to see your saved recipes </p>
+    <div id = "recipe_list">
+    </div>
+  </main>
+  <footer>
+    Real Recipes <br>
+    <a href=#>Help@RealRecipes.com</a> </br>
+    <a href=#>1-800-HEALTHY</a>
+  </footer>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>
