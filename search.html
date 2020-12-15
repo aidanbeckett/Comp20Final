@@ -90,10 +90,26 @@
 			for (var i = 0; i < 10; i++) {
 				if (recipes[i] != null)
 				{
+				//str += "<div class='recipe'>";
+				//str += "Recipe Name: "+recipes[i]["recipe"]["label"] 
+				//+ " <a href=" + recipes[i]["recipe"]["url"]+">link</a></div><br>";
 				str += "<div class='recipe'>";
-				str += "Recipe Name: "+recipes[i]["recipe"]["label"] 
-				+ " <a href=" + recipes[i]["recipe"]["url"]+">link</a></div><br>";
-                str += "<form><input type='button' value='Add to My Recipes' onclick='Test("+i+")'"
+				str += "<img src='" + recipes[i]["recipe"]["image"] + "' ALIGN='left'><br>";
+				str += "<h2><a href=" + recipes[i]["recipe"]["url"]+" target='_blank'>"+recipes[i]["recipe"]["label"]+"</a></h2>";
+				str += Math.round(recipes[i]["recipe"]["calories"])+" calories <br>";
+				str += "Servings: "+recipes[i]["recipe"]["yield"] + "<br>";
+				str += "Ingredients: " + recipes[i]["recipe"]["ingredients"].length + "<br>";
+				for (var j = 0; j < recipes[i]["recipe"]["healthLabels"].length-1; j++) {
+					str += recipes[i]["recipe"]["healthLabels"][j] + ", ";
+				}
+				str += recipes[i]["recipe"]["healthLabels"][j] + "<br>";
+				for (var j = 0; j < recipes[i]["recipe"]["dietLabels"].length; j++) {
+					str += recipes[i]["recipe"]["dietLabels"][j] + " ";
+				}
+				//save button
+				//str += "<br><br><input type='button' name='save' value='Save Recipe'></div>";
+				str += "<form><input type='button' value='test' onclick='Test("+i+")''></form>";
+        str += "<form><input type='button' value='Add to My Recipes' onclick='Test("+i+")'"
                     + "id='btn"+i+"'></form>";
 				}
 			}
