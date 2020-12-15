@@ -131,14 +131,18 @@
 		}
 
 		function Test(num){
-			console.log(JSON.stringify(recipes[num]));
-			//{email: user_email, recipe: {recipe json}}
-			$.post('/my_recipes', recipes[num], function(data, status){
-                console.log("Status: " + status);
-                if (status == "success"){
-                    $('#btn' + num).val("Succesfully Added!")
-                }
+		
+		if (auth2.isSignedIn.get()){
+			var profile = auth2.currentUser.get().getBasicProfile();
+			var email = profile.getEmail();
+			var data = {"email": email, "recipe": recipes[num]};
+			$.post('/my_recipes', data, function(data, status){
+                	console.log("Status: " + status);
+                	if (status == "success"){
+                  	  $('#btn' + num).val("Succesfully Added!")
+                	}
 			});
+		}
 		}
     </script>
 </head>
