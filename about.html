@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Recipe App">
+    <meta name="author" content="Eric, Jessica, Aidan, Pan">
+    <meta name="google-signin-client_id" content="1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com">
+    <link rel="stylesheet" href="RRstyle.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Real Recipes</title>
+    <style>
+      .column {
+          float: left;
+          width: 25%;
+          text-align: center;
+      }
+      
+      .fit {
+        width: 25%;
+        height:auto;
+      }
+    </style>
+    <script>
+    function init() {
+      console.log("runs init")
+      gapi.load('auth2', async function() {
+      auth2 =  gapi.auth2.init({
+            client_id: '1007079762916-fe1hepr46ishdvmq3uf4cuathgmaekiu.apps.googleusercontent.com'
+          });
+      });
+    }
+    </script>
+</head>
+<body>
+  <script> 
+    var auth2; var recipe_list;
+
+    async function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      recipesPage();
+    }
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+    </script>
+  <header class="topnav">
+    <a href="index.html"><img src= "/logo1.png" alt="Real Recipes Logo" height="35px" class="logo"></a>
+    <nav>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href = "/search">Search Page</a></li>
+        <li><a href = "/my_recipes">My Recipes</a></input></li>
+        <li>|</li>
+        <li><div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </li>
+        <li><a href="/" onclick="signOut();">Sign out</a></li>
+
+      </ul>
+    </nav>
+  </header>
+  <br><br>
+  <main>
+    <h1> About Us </h1>
+    <div class="column">
+      <h3>Eric Toh</h3>
+      <img class="fit" src = "Eric.jpeg">
+      <p>Blurb</p>
+    </div>
+    <div class="column">
+      <h3>Panru Jing</h3>
+      <img class="fit" src = "Pan.jpg">
+      <p>Blurb</p>
+    </div>
+    <div class="column">
+      <h3>Aidan Beckett</h3>
+      <img class="fit" src = "Aidan.jpg">
+      <p>Blurb</p>
+    </div>
+    <div class="column">
+      <h3>Jessica Nordlund</h3>
+      <img class="fit" src = "Jessica.jpeg">
+      <p>Blurb</p>
+    </div>
+  </main>
+  <footer>
+    Real Recipes <br>
+    <a href=#>Help@RealRecipes.com</a> </br>
+    <a href=#>1-800-HEALTHY</a>
+  </footer>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>
