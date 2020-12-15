@@ -139,6 +139,7 @@ a:hover {
 /*Recipe Class*/
 .recipe {
   padding-top: 120px;
+  text-align: center;
 }
 
 .recipe a {
