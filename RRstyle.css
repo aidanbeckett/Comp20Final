@@ -17,6 +17,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 /*Images*/
@@ -73,6 +74,7 @@ footer {
   padding: 10px 10px;
   text-align: center;
   line-height: 24px;
+  position: fixed;
 }
 
 /*Index*/
@@ -84,10 +86,14 @@ footer {
 }
 
 .recipesearch {
-  width: 80%;
-  position: relative;
-  text-align: center;
+  width: 50%;
   margin: 0 auto;
+  padding-left: 50px;
+}
+
+
+.keyword {
+  width: 100%;
 }
 
 /*Login Form*/
