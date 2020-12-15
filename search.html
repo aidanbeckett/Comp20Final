@@ -107,7 +107,7 @@
 					str += recipes[i]["recipe"]["dietLabels"][j] + " ";
 				}
 				//save button
-        str += "<form><input type='button' value='Add to My Recipes' onclick='Test("+i+")'"
+        str += "<form><input type='button' value='Add to My Recipes' onclick='Insert("+i+")'"
                     + "id='btn"+i+"'></form>";
 				}
 			}
@@ -130,14 +130,14 @@
 			}
 		}
 
-		function Test(num){
-		console.log("Runs test function");
+	function Insert(num){
+		console.log("Runs Insert function");
 		if (auth2.isSignedIn.get()){
 			var profile = auth2.currentUser.get().getBasicProfile();
 			var email = profile.getEmail();
 			var data = {"email": email, "recipe": {
 				"label": recipes[num]["recipe"]["label"],
-				"image": recipes[num]["image"]["image"],
+				"image": recipes[num]["recipe"]["image"],
 				"url": recipes[num]["recipe"]["url"],
 				"yield": recipes[num]["recipe"]["yield"],
 				"dietLabels": recipes[num]["recipe"]["dietLabels"],
@@ -149,7 +149,7 @@
 			console.log("Data to send " + data);
 		
 			$.post('/add_recipe', data, function(data, status){
-			console.log("Status: " + status);
+			console.log("Status: " + status); console.log(data)
 		
 			if (status == "success"){
 		   		 $('#btn' + num).val("Succesfully Added!")
