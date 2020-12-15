@@ -170,24 +170,24 @@
       Keyword: <input type="text" id="keyword"><br>
       Health Filters: <input type="checkbox" id="isfilter" onchange="ShowFilters()"><br>
       <div id="healthfilters" style="display: none">
-          <br>Note: Not all filters must be filled out to execute a search<br>
-          Calories: Min<input type="text" id="calmin" value="0">&nbsp;&nbsp;
-          Max<input type="text" id="calmax"><br>
+          <br>Note: Not all filters must be filled out to execute a search<br><br>
+          Calories: <br>Min<input type="text" id="calmin" value="0"><br>
+          Max<input type="text" id="calmax"><br><br>
           Maximum Ingredients: <input type="number" min="1" id="ingr"><br>
           Diet: <select id="diet" size="1">
               <option>balanced</option>
               <option>high-protein</option>
               <option>low-fat</option>
               <option>low-carb</option>
-          </select><br>
+          </select><br><br>
           <div class="boxes">
           Vegetarian:<input type="checkbox" id="vege" name="restrictions">
           Vegan:<input type="checkbox" id="vegan" name="restrictions">
           Peanut Free:<input type="checkbox" id="peanut" name="restrictions">
           Tree Nut Free:<input type="checkbox" id="treenut" name="restrictions"><br>
+        </div><br>
           Ingredients to exclude (if multiple, seperate by commas):
           <input type="text" id="exclude"><br>
-        </div>
       </div>
       <input type="button" name="search" value="search" onclick="Search()"><br>
   </form>
