@@ -54,13 +54,39 @@
               var user_data = JSON.parse(xmlhttp.responseText);
               console.log(user_data);
               var error_text = document.getElementById('recipe_list_err');
+              var recipe_list_str = "";
                 if(!(jQuery.isEmptyObject(user_data))) {
                   recipe_list = user_data.recipes;
                   if(user_data.recipes.length < 1) {
                     error_text.innerHTML = "Your recipe list is empty";
                   }else {
+                    console.log("Creating List")
                     //Create List
-                    error_text.innerHTML = "<div> </div";
+                    for (var i = 0; i < recipe_list.length; i++) {
+				              if (recipe_list[i] != null) {
+                        recipe_list_str += "<div class='recipe'>";
+                        recipe_list_str += "<img src='" + recipe_list[i]["image"] + "' ALIGN='left'><br>";
+                        recipe_list_str += "<h2><a href=" + recipe_list[i]["url"]+" target='_blank'>"+recipe_list[i]["label"]+"</a></h2>";
+                        recipe_list_str += Math.round(recipe_list[i]["calories"])+" calories <br>";
+                        recipe_list_str += "Servings: "+recipe_list[i]["yield"] + "<br>";
+                        recipe_list_str += "Ingredients: " + recipe_list[i]["ingredients"].length + "<br>";
+                        if(recipe_list[i]["healthLabels"] != undefined) {
+				                for (var j = 0; j < recipe_list[i]["healthLabels"].length; j++) {
+					                  recipe_list_str += recipe_list[i]["healthLabels"][j] + ", ";
+                        }
+                        }
+                        recipe_list_str += recipe_list[i]["healthLabels"][j] + "<br>";
+                        if(recipe_list[i]["dietLabels"] != undefined) {
+				                for (var j = 0; j < recipe_list[i]["dietLabels"].length; j++) {
+					                  recipe_list_str += recipe_list[i]["dietLabels"][j] + " ";
+                        }
+                        }
+				                //save button
+                        recipe_list_str += "<form><input type='button' value='Remove from My List' onclick='Remove("+i+")'"+ "id='btn"+i+"'></form>";                        
+                      }
+                    }
+                    document.getElementById("recipe_list").innerHTML = recipe_list_str;
+                    error_text.innerHTML = ""
                   }
                 }else {
                   recipe_list = [];
@@ -76,6 +102,36 @@
       console.log("Sending " + data)
       xmlhttp.send(data);
 }
+
+function Remove(num){
+		console.log("Runs Remove function");
+		if (auth2.isSignedIn.get()){
+			var profile = auth2.currentUser.get().getBasicProfile();
+			var email = profile.getEmail();
+			var data = {"email": email, "recipe": {
+				"label": recipe_list[num]["label"],
+				"image": recipe_list[num]["image"],
+				"url": recipe_list[num]["url"],
+				"yield": recipe_list[num]["yield"],
+				"dietLabels": recipe_list[num]["dietLabels"],
+				"healthLabels": recipe_list[num]["healthLabels"],
+				"calories": recipe_list[num]["calories"],
+				"ingredients": recipe_list[num]["ingredients"],
+			}};
+			
+			console.log("Data to send " + data);
+    
+      fetch('/remove_recipe', {
+        method: 'delete',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => {
+        if (res.ok) console.log("Successful delete"); location.reload();
+      });
+	  }else {
+      console.log("Tried to remove without being signed in");
+    }
+  }
     console.log("Loaded scripts");
     </script>
   <header class="topnav">
@@ -94,12 +150,10 @@
     </nav>
   </header>
   <br><br>
-  <main>
     <h1> Saved Recipes </h1>
-    <p id = "recipe_list_err"> You must be logged in to see your saved recipes </p>
-    <div id = "recipe_list">
+    <p id = "recipe_list_err"> </p>
+    <div id = 'recipe_list' class = 'display'>
     </div>
-  </main>
   <footer>
     Real Recipes <br>
     <a href=#>Help@RealRecipes.com</a> </br>
