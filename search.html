@@ -159,6 +159,7 @@
 		  </ul>
 		</nav>
 	  </header>
+  <div id="recipesearch">
   <h3>Recipe Search</h3>
 
   <form>
@@ -175,15 +176,16 @@
               <option>low-fat</option>
               <option>low-carb</option>
           </select><br>
-          Vegetarian:<input type="checkbox" id="vege" name="restricitons">
-          Vegan:<input type="checkbox" id="vegan" name="restricitons">
-          Peanut Free:<input type="checkbox" id="peanut" name="restricitons">
-          Tree Nut Free:<input type="checkbox" id="treenut" name="restricitons"><br>
+          Vegetarian:<input type="checkbox" id="vege" name="restrictions">
+          Vegan:<input type="checkbox" id="vegan" name="restrictions">
+          Peanut Free:<input type="checkbox" id="peanut" name="restrictions">
+          Tree Nut Free:<input type="checkbox" id="treenut" name="restrictions"><br>
           Ingredients to exclude (if multiple, seperate by commas):
           <input type="text" id="exclude"><br>
       </div>
       <input type="button" name="search" value="search" onclick="Search()"><br>
   </form>
+  </div>
   
   <div id = "display">&nbsp;</div>
 
