@@ -131,19 +131,25 @@
 		}
 
 		function Test(num){
-		
+		console.log("Runs test function");
 		if (auth2.isSignedIn.get()){
 			var profile = auth2.currentUser.get().getBasicProfile();
 			var email = profile.getEmail();
-			var data = {"email": email, "recipe": recipes[num]};
-			$.post('/my_recipes', data, function(data, status){
-                	console.log("Status: " + status);
-                	if (status == "success"){
-                  	  $('#btn' + num).val("Succesfully Added!")
-                	}
-			});
+			var data = {"email": email, "recipe": recipes[num]}; 
+			console.log("Data to send " + data);
+		
+			$.post('/add_recipe', data, function(data, status){
+			console.log("Status: " + status);
+		
+			if (status == "success"){
+		   		 $('#btn' + num).val("Succesfully Added!")
+			}
+		});
+		}else {
+			$('#btn' + num).val("You must be signed in to add recipes.")
+			console.log("Not signed in");
 		}
-		}
+	}
     </script>
 </head>
 
