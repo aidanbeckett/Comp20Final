@@ -112,17 +112,29 @@ footer {
 }
 
 .boxes {
-  width: 40%;
+  width: 100%;
 }
 
 input {
-  width: 90%;
   margin-bottom: 10px;
   background: white; 
   outline: none;
   padding: 10px;
   color: black;
   border-radius: 6px;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+}
+
+input[type=checkbox] {
+  width: auto;
+}
+
+input[type=text] {
+  width: 40%;
 }
 
 input[type=button], input[type=submit] {
