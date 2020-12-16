@@ -1,11 +1,16 @@
 /*Page*/
 html {
   width: 100%;
-  height:100%
+  height:100%;
 }
 
 h1 {
   text-align: center;
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
 }
 
 /*Body*/
@@ -34,39 +39,49 @@ body {
 }
 
 /*Nav Bar*/
-.topnav {
+header {
   background-color: #333;
   opacity: 0.8;
-  overflow: hidden;
+  height: 70px;
+  width: 100%;
+  display: flex;
 }
 
-.logo {
-  position: relative;
-  display: block;
-  float: left;
+header img, header nav, header a {
+  display: inline-block;
+  align-self: center;
+}
+
+header img {
   opacity: 1.0;
-  padding-left: 20px;
-  padding-top: 5px;
+  padding-left: 15px;
 }
 
-nav {
-  margin: 0;
-  float: right;
+header nav {
+  width: 100%;
+  padding-right: 15px;
+  font-size: 1em;
+  text-align: right;
 }
 
-nav ul {
-  position: relative;
-  display: block;
-  float: left;
+header nav ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 nav ul li {
-  position: relative;
-  display: block;
-  float: left;
+  display: inline-block;
   margin: 0px 15px;
   text-decoration: none;
+}
+
+header nav li a {
+  display: block;
+  font-size: 1em;
+  text-decoration: none;
+  color: black;
+  line-height: 1;
 }
 
 /*Footer*/
