@@ -153,8 +153,8 @@ input[type=checkbox] {
   width: auto;
 }
 
-input[type=text] {
-  width: 40%;
+input[type=text], input[type=number] {
+  width: 80%;
 }
 
 input[type=button], input[type=submit] {
